@@ -1,30 +1,44 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { Slot } from "expo-router";
 import {
   useFonts as useRoboto,
   Roboto_400Regular,
+  Roboto_400Regular_Italic,
+  Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 import {
   useFonts as useNotoSerif,
   NotoSerif_400Regular,
   NotoSerif_700Bold,
 } from "@expo-google-fonts/noto-serif";
-
-import "../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { NativeWindStyleSheet } from "nativewind";
+import { ThemeProvider, createTheme } from "@rneui/themed";
+import { View } from "react-native";
+
+const theme = createTheme({
+  lightColors: {
+    primary: "#C94264",
+    secondary: "#FFF8F0",
+  },
+  mode: "light",
+  components: {
+    Text: {
+      style: {
+        fontFamily: "Roboto_400Regular",
+        color: "#C94264",
+      },
+    },
+  },
+});
 
 SplashScreen.preventAutoHideAsync();
-
-// For Web platform https://stackoverflow.com/questions/73650434/add-expo-google-fonts-by-nativewind-or-tailwind
-NativeWindStyleSheet.setOutput({
-  default: "native",
-});
 
 export default function Layout() {
   const [robotoLoaded] = useRoboto({
     Roboto_400Regular,
+    Roboto_400Regular_Italic,
+    Roboto_700Bold,
   });
   const [notoSerifLoaded] = useNotoSerif({
     NotoSerif_400Regular,
@@ -42,10 +56,26 @@ export default function Layout() {
     return null;
   }
 
-  // Render the children routes now that all the assets are loaded.
   return (
-    <SafeAreaView onLayout={onLayoutRootView} className="flex-1">
-      <Slot />
-    </SafeAreaView>
+    <ThemeProvider theme={theme}>
+      <SafeAreaView
+        onLayout={onLayoutRootView}
+        style={{
+          display: "flex",
+          flex: 1,
+          backgroundColor: "#FFF8F0",
+        }}
+      >
+        <View
+          style={{
+            display: "flex",
+            flex: 1,
+            paddingHorizontal: 30,
+          }}
+        >
+          <Slot />
+        </View>
+      </SafeAreaView>
+    </ThemeProvider>
   );
 }
