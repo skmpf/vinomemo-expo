@@ -15,6 +15,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeProvider, createTheme } from "@rneui/themed";
 import { View } from "react-native";
+import { AuthProvider } from "../providers/AuthProvider";
 
 const theme = createTheme({
   lightColors: {
@@ -58,24 +59,26 @@ export default function Layout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SafeAreaView
-        onLayout={onLayoutRootView}
-        style={{
-          display: "flex",
-          flex: 1,
-          backgroundColor: "#FFF8F0",
-        }}
-      >
-        <View
+      <AuthProvider>
+        <SafeAreaView
+          onLayout={onLayoutRootView}
           style={{
             display: "flex",
             flex: 1,
-            paddingHorizontal: 30,
+            backgroundColor: "#FFF8F0",
           }}
         >
-          <Slot />
-        </View>
-      </SafeAreaView>
+          <View
+            style={{
+              display: "flex",
+              flex: 1,
+              paddingHorizontal: 30,
+            }}
+          >
+            <Slot />
+          </View>
+        </SafeAreaView>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
