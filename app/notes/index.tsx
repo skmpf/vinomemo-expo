@@ -9,7 +9,6 @@ export default function Page() {
   return (
     <View
       style={{
-        display: "flex",
         alignItems: "center",
         paddingBottom: 70,
       }}

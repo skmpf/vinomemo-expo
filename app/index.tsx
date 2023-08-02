@@ -7,10 +7,9 @@ export default function Page() {
   return (
     <View
       style={{
-        display: "flex",
         flex: 1,
-        justifyContent: "space-between",
-        paddingVertical: 50,
+        paddingHorizontal: 30,
+        justifyContent: "space-around",
       }}
     >
       <View>
@@ -21,7 +20,7 @@ export default function Page() {
             paddingBottom: 20,
           }}
           h1Style={{
-            fontSize: 60,
+            fontSize: 50,
           }}
         >
           Note down your wine tasting{" "}
@@ -36,7 +35,7 @@ export default function Page() {
         <Text
           style={{
             color: "#932541",
-            fontSize: 20,
+            fontSize: 15,
           }}
         >
           <Text
@@ -50,13 +49,7 @@ export default function Page() {
           is the perfect way to reference and remember your wine tastings.
         </Text>
       </View>
-      <View
-        style={{
-          display: "flex",
-          alignItems: "center",
-          paddingBottom: 70,
-        }}
-      >
+      <View style={{ alignItems: "center" }}>
         <Button
           size="lg"
           radius="md"

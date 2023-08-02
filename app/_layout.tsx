@@ -14,7 +14,6 @@ import {
 } from "@expo-google-fonts/noto-serif";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeProvider, createTheme } from "@rneui/themed";
-import { View } from "react-native";
 import { AuthProvider } from "../providers/AuthProvider";
 
 const theme = createTheme({
@@ -63,20 +62,11 @@ export default function Layout() {
         <SafeAreaView
           onLayout={onLayoutRootView}
           style={{
-            display: "flex",
             flex: 1,
             backgroundColor: "#FFF8F0",
           }}
         >
-          <View
-            style={{
-              display: "flex",
-              flex: 1,
-              paddingHorizontal: 30,
-            }}
-          >
-            <Slot />
-          </View>
+          <Slot />
         </SafeAreaView>
       </AuthProvider>
     </ThemeProvider>

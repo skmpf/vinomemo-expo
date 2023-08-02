@@ -5,18 +5,19 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Link } from "expo-router";
 import { useSignup } from "../../hooks/useSignup";
+import { KeyboardAvoidingContainer } from "../../components/KeyboardAvoidingContainer";
 
 export default function Page() {
   const { isLoading, signupUser } = useSignup();
 
   return (
-    <View
-      style={{
-        display: "flex",
-        flex: 1,
-      }}
-    >
-      <View style={{ marginTop: 50, alignItems: "center" }}>
+    <KeyboardAvoidingContainer>
+      <View
+        style={{
+          alignItems: "center",
+          paddingVertical: 50,
+        }}
+      >
         <Text h4 style={{ marginBottom: 20, fontFamily: "Roboto_700Bold" }}>
           Sign up with email
         </Text>
@@ -53,7 +54,7 @@ export default function Page() {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-          <View style={{ marginTop: 60 }}>
+          <View style={{ paddingVertical: 20 }}>
             <View style={{ marginBottom: 30 }}>
               <Text>Name</Text>
               <Input
@@ -98,9 +99,7 @@ export default function Page() {
             </View>
             <View
               style={{
-                display: "flex",
                 alignItems: "center",
-                marginTop: 20,
               }}
             >
               <Button
@@ -116,7 +115,6 @@ export default function Page() {
                   style={{
                     color: "#932541",
                     fontFamily: "Roboto_400Regular_Italic",
-                    fontStyle: "italic",
                   }}
                 >
                   Already have an account?{" "}
@@ -134,6 +132,6 @@ export default function Page() {
           </View>
         )}
       </Formik>
-    </View>
+    </KeyboardAvoidingContainer>
   );
 }

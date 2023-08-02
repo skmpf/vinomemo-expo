@@ -5,18 +5,19 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Link } from "expo-router";
 import { useLogin } from "../../hooks/useLogin";
+import { KeyboardAvoidingContainer } from "../../components/KeyboardAvoidingContainer";
 
 export default function Page() {
   const { isLoading, loginUser } = useLogin();
 
   return (
-    <View
-      style={{
-        display: "flex",
-        flex: 1,
-      }}
-    >
-      <View style={{ marginTop: 50, alignItems: "center" }}>
+    <KeyboardAvoidingContainer>
+      <View
+        style={{
+          alignItems: "center",
+          paddingVertical: 50,
+        }}
+      >
         <Text h4 style={{ marginBottom: 20, fontFamily: "Roboto_700Bold" }}>
           Log in to{" "}
           <Text
@@ -50,7 +51,7 @@ export default function Page() {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-          <View style={{ marginTop: 100 }}>
+          <View style={{ paddingBottom: 20, paddingTop: 100 }}>
             <View style={{ marginBottom: 30 }}>
               <Text>Email</Text>
               <Input
@@ -74,9 +75,7 @@ export default function Page() {
             </View>
             <View
               style={{
-                display: "flex",
                 alignItems: "center",
-                marginTop: 20,
               }}
             >
               <Button
@@ -98,7 +97,16 @@ export default function Page() {
                     fontStyle: "italic",
                   }}
                 >
-                  Not registered on VinoMemo yet?{" "}
+                  Not registered on{" "}
+                  <Text
+                    style={{
+                      fontFamily: "NotoSerif_400Regular",
+                      color: "#932541",
+                    }}
+                  >
+                    VinoMemo
+                  </Text>{" "}
+                  yet?{" "}
                   <Text
                     style={{
                       textTransform: "uppercase",
@@ -113,6 +121,6 @@ export default function Page() {
           </View>
         )}
       </Formik>
-    </View>
+    </KeyboardAvoidingContainer>
   );
 }
