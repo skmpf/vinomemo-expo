@@ -1,4 +1,3 @@
-import React from "react";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 
 export const KeyboardAvoidingContainer = ({

@@ -1,4 +1,4 @@
-import React from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { router, useRootNavigationState, useSegments } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
@@ -20,7 +20,7 @@ type UseAuth = {
   user: User | null;
 };
 
-const AuthContext = React.createContext<UseAuth>({
+const AuthContext = createContext<UseAuth>({
   authenticate: () => Promise.resolve(),
   logout: () => {},
   user: null,
@@ -28,7 +28,7 @@ const AuthContext = React.createContext<UseAuth>({
 
 // This hook can be used to access the user info.
 export function useAuth() {
-  return React.useContext(AuthContext);
+  return useContext(AuthContext);
 }
 
 // This hook will protect the route access based on user authentication.
@@ -36,7 +36,7 @@ function useProtectedRoute(user: User | null) {
   const segments = useSegments();
   const navigationState = useRootNavigationState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     // https://github.com/expo/router/issues/740
     if (!navigationState?.key) return;
 
@@ -57,7 +57,7 @@ function useProtectedRoute(user: User | null) {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setAuth] = React.useState<User | null>(null);
+  const [user, setAuth] = useState<User | null>(null);
 
   useProtectedRoute(user);
 

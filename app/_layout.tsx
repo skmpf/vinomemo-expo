@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { Slot } from "expo-router";
 import {

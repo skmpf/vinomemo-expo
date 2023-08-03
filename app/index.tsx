@@ -1,4 +1,3 @@
-import React from "react";
 import { View } from "react-native";
 import { router, Link } from "expo-router";
 import { Button, Text } from "@rneui/themed";
