@@ -9,7 +9,8 @@ type UseLoginResponse = {
   loginUser: (email: string, password: string) => Promise<void>;
 };
 
-const VINOMEMO_API_URL = process.env.EXPO_PUBLIC_VINOMEMO_API_URL;
+const VINOMEMO_API_URL =
+  process.env.EXPO_PUBLIC_VINOMEMO_API_URL || "http://localhost:3001";
 
 export const useLogin = (): UseLoginResponse => {
   const [isLoading, setIsLoading] = useState(false);
