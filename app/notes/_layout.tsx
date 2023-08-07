@@ -7,10 +7,7 @@ export default function Layout() {
         headerStyle: {
           backgroundColor: "#FFF8F0",
         },
-        headerTitleStyle: {
-          fontFamily: "Roboto_700Bold",
-          color: "#C94264",
-        },
+        headerTintColor: "#C94264",
       }}
     />
   );

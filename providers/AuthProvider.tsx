@@ -10,7 +10,7 @@ export type User = {
   email: string;
 };
 
-type DecodedToken = {
+export type DecodedToken = {
   user: User;
 };
 

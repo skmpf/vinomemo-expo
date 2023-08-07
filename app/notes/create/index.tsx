@@ -1,6 +1,7 @@
 import { Stack, router } from "expo-router";
 import { Alert, Button, View } from "react-native";
 import { Text } from "@rneui/themed";
+import { Entypo } from "@expo/vector-icons";
 
 export default function CreateNote() {
   const handleBack = () => {
@@ -32,7 +33,13 @@ export default function CreateNote() {
         options={{
           title: "New note",
           headerLeft: () => (
-            <Button title="Back" onPress={handleBack} color="#C94264" />
+            <Entypo
+              title="Back"
+              onPress={handleBack}
+              name="chevron-thin-left"
+              size={22}
+              color="#C94264"
+            />
           ),
           headerRight: () => (
             <Button title="Save" onPress={handleSave} color="#C94264" />
