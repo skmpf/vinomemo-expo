@@ -1,9 +1,13 @@
 import { Stack, router, useLocalSearchParams } from "expo-router";
-import { Text } from "@rneui/themed";
 import { Button, View } from "react-native";
+import { Entypo } from "@expo/vector-icons";
+import { useFetch } from "../../../hooks/useFetch";
+import { Summary } from "./Summary";
 
 export default function Note() {
   const { id } = useLocalSearchParams();
+  const { data: note, isLoading, refetchData } = useFetch(`notes/${id}`);
+
   return (
     <View
       style={{
@@ -15,7 +19,16 @@ export default function Note() {
     >
       <Stack.Screen
         options={{
-          title: "Note",
+          title: "Summary",
+          headerLeft: () => (
+            <Entypo
+              title="Back"
+              onPress={() => router.back()}
+              name="chevron-thin-left"
+              size={22}
+              color="#C94264"
+            />
+          ),
           headerRight: () => (
             <Button
               title="Edit"
@@ -25,7 +38,7 @@ export default function Note() {
           ),
         }}
       />
-      <Text>Note {id}</Text>
+      <Summary note={note} />
     </View>
   );
 }
