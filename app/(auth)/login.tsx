@@ -78,7 +78,7 @@ export default function Page() {
               }}
             >
               <Button
-                onPress={handleSubmit}
+                onPress={() => handleSubmit()}
                 loading={isLoading}
                 title="Log in"
                 size="lg"

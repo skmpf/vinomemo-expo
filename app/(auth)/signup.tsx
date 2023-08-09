@@ -102,7 +102,7 @@ export default function Page() {
               }}
             >
               <Button
-                onPress={handleSubmit}
+                onPress={() => handleSubmit()}
                 loading={isLoading}
                 title="Create an account"
                 size="lg"
