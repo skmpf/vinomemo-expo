@@ -3,8 +3,8 @@ import { Button, Text, Input } from "@rneui/themed";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Link } from "expo-router";
-import { useLogin } from "../../hooks/useLogin";
-import { KeyboardAvoidingContainer } from "../../components/KeyboardAvoidingContainer";
+import { useLogin } from "@/hooks/useLogin";
+import { KeyboardAvoidingContainer } from "@/components/KeyboardAvoidingContainer";
 
 export default function Page() {
   const { isLoading, loginUser } = useLogin();
@@ -31,8 +31,8 @@ export default function Page() {
       </View>
       <Formik
         initialValues={{
-          email: "",
-          password: "",
+          email: "***REMOVED***",
+          password: "***REMOVED***",
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()

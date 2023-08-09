@@ -3,8 +3,8 @@ import { Button, Text, Input } from "@rneui/themed";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Link } from "expo-router";
-import { useSignup } from "../../hooks/useSignup";
-import { KeyboardAvoidingContainer } from "../../components/KeyboardAvoidingContainer";
+import { useSignup } from "@/hooks/useSignup";
+import { KeyboardAvoidingContainer } from "@/components/KeyboardAvoidingContainer";
 
 export default function Page() {
   const { isLoading, signupUser } = useSignup();

@@ -2,9 +2,9 @@ import { useCallback, useState } from "react";
 import { Stack, router } from "expo-router";
 import { Alert, Button, FlatList, RefreshControl, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { useAuth } from "../../providers/AuthProvider";
-import { useFetch } from "../../hooks/useFetch";
-import { NoteCard } from "./NoteCard";
+import { useAuth } from "@/providers/AuthProvider";
+import { useFetch } from "@/hooks/useFetch";
+import { NoteCard } from "@/components/NoteView/NoteCard";
 
 export default function Home() {
   const { logout, user } = useAuth();

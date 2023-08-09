@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { router } from "expo-router";
 import { Button as RNEButton, ListItem, Text } from "@rneui/themed";
+import { Icon } from "@rneui/base";
 import { Entypo } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { INote } from "../../modules/note";
-import { Icon } from "@rneui/base";
+import { INote } from "@/modules/note";
 
 const VINOMEMO_API_URL =
   process.env.EXPO_PUBLIC_VINOMEMO_API_URL || "http://localhost:3001";

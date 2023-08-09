@@ -35,6 +35,9 @@
         "projectId": "8aa407c2-e68c-4d70-910d-b392af18f06d"
       }
     },
+    "experiments": {
+      "tsconfigPaths": true
+    },
     "owner": "sebkf"
   }
 }

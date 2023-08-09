@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { Alert } from "react-native";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useAuth } from "../providers/AuthProvider";
-import { Alert } from "react-native";
+import { useAuth } from "@/providers/AuthProvider";
 
 type UseSignupResponse = {
   isLoading: boolean;

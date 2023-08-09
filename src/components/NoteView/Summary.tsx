@@ -1,6 +1,6 @@
 import { ScrollView, View } from "react-native";
 import { Card, Text } from "@rneui/themed";
-import { INote } from "../../../modules/note";
+import { INote } from "@/modules/note";
 
 export const Summary = ({ note }: { note: INote | undefined }) => {
   if (!note) return null;

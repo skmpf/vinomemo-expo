@@ -1,8 +1,8 @@
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import { Button, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { useFetch } from "../../../hooks/useFetch";
-import { Summary } from "./Summary";
+import { useFetch } from "@/hooks/useFetch";
+import { Summary } from "@/components/NoteView/Summary";
 
 export default function Note() {
   const { id } = useLocalSearchParams();

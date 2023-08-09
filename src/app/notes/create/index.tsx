@@ -1,7 +1,7 @@
 import { Stack, router } from "expo-router";
 import { Alert, Button, View } from "react-native";
-import { Text } from "@rneui/themed";
 import { Entypo } from "@expo/vector-icons";
+import { NoteForm } from "@/components/NoteForm/NoteForm";
 
 export default function CreateNote() {
   const handleBack = () => {
@@ -46,7 +46,7 @@ export default function CreateNote() {
           ),
         }}
       />
-      <Text>Create note</Text>
+      <NoteForm />
     </View>
   );
 }
