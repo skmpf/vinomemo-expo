@@ -15,19 +15,33 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeProvider, createTheme } from "@rneui/themed";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { theme as custom } from "@/constants/theme";
 
 const theme = createTheme({
   lightColors: {
-    primary: "#C94264",
-    secondary: "#FFF8F0",
+    primary: custom.colors.primary,
+    secondary: custom.colors.secondary,
+    background: custom.colors.background,
   },
   mode: "light",
   components: {
     Text: {
       style: {
-        fontFamily: "Roboto_400Regular",
-        color: "#C94264",
+        fontFamily: custom.fonts.primary,
       },
+      h1Style: {
+        fontFamily: custom.fonts.brand,
+        fontSize: 50,
+        color: custom.colors.primary,
+        paddingBottom: 20,
+      },
+      h2Style: {
+        fontFamily: custom.fonts.primaryBold,
+        fontSize: 23,
+        color: custom.colors.primary,
+        marginBottom: 20,
+      },
+      h4Style: {},
     },
   },
 });
@@ -63,7 +77,7 @@ export default function Layout() {
           onLayout={onLayoutRootView}
           style={{
             flex: 1,
-            backgroundColor: "#FFF8F0",
+            backgroundColor: custom.colors.background,
           }}
         >
           <Slot />

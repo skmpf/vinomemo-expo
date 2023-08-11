@@ -1,13 +1,15 @@
+import { useTheme } from "@rneui/themed";
 import { Stack } from "expo-router/stack";
 
 export default function Layout() {
+  const { theme } = useTheme();
   return (
     <Stack
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#FFF8F0",
+          backgroundColor: theme.colors.background,
         },
-        headerTintColor: "#C94264",
+        headerTintColor: theme.colors.primary,
       }}
     />
   );

@@ -1,9 +1,12 @@
 import { Stack, router } from "expo-router";
 import { Alert, Button, View } from "react-native";
+import { useTheme } from "@rneui/themed";
 import { Entypo } from "@expo/vector-icons";
 import { NoteForm } from "@/components/NoteForm/NoteForm";
 
 export default function CreateNote() {
+  const { theme } = useTheme();
+
   const handleBack = () => {
     Alert.alert(
       "Warning",
@@ -26,7 +29,7 @@ export default function CreateNote() {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#FFF8F0",
+        backgroundColor: theme.colors.background,
       }}
     >
       <Stack.Screen
@@ -38,11 +41,15 @@ export default function CreateNote() {
               onPress={handleBack}
               name="chevron-thin-left"
               size={22}
-              color="#C94264"
+              color={theme.colors.primary}
             />
           ),
           headerRight: () => (
-            <Button title="Save" onPress={handleSave} color="#C94264" />
+            <Button
+              title="Save"
+              onPress={handleSave}
+              color={theme.colors.primary}
+            />
           ),
         }}
       />

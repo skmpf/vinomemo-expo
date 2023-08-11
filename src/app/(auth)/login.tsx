@@ -1,13 +1,15 @@
 import { View } from "react-native";
-import { Button, Text, Input } from "@rneui/themed";
+import { Button, Text, Input, useTheme } from "@rneui/themed";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Link } from "expo-router";
 import { useLogin } from "@/hooks/useLogin";
 import { KeyboardAvoidingContainer } from "@/components/KeyboardAvoidingContainer";
+import { SwitchToReg } from "@/components/SwitchToReg";
+import { theme as custom } from "@/constants/theme";
 
 export default function Page() {
   const { isLoading, loginUser } = useLogin();
+  const { theme } = useTheme();
 
   return (
     <KeyboardAvoidingContainer>
@@ -17,17 +19,20 @@ export default function Page() {
           paddingVertical: 50,
         }}
       >
-        <Text h4 style={{ marginBottom: 20, fontFamily: "Roboto_700Bold" }}>
+        <Text h2>
           Log in to{" "}
           <Text
             style={{
-              fontFamily: "NotoSerif_700Bold",
+              fontFamily: custom.fonts.brandBold,
+              color: theme.colors.primary,
             }}
           >
             VinoMemo
           </Text>
         </Text>
-        <Text>Welcome back! Sign in with your email to continue</Text>
+        <Text style={{ color: theme.colors.primary }}>
+          Welcome back! Sign in with your email to continue
+        </Text>
       </View>
       <Formik
         initialValues={{
@@ -88,34 +93,7 @@ export default function Page() {
                   paddingBottom: 30,
                 }}
               />
-              <Link href="/signup">
-                <Text
-                  style={{
-                    color: "#932541",
-                    fontFamily: "Roboto_400Regular_Italic",
-                    fontStyle: "italic",
-                  }}
-                >
-                  Not registered on{" "}
-                  <Text
-                    style={{
-                      fontFamily: "NotoSerif_400Regular",
-                      color: "#932541",
-                    }}
-                  >
-                    VinoMemo
-                  </Text>{" "}
-                  yet?{" "}
-                  <Text
-                    style={{
-                      textTransform: "uppercase",
-                      fontFamily: "Roboto_700Bold",
-                    }}
-                  >
-                    Signup
-                  </Text>
-                </Text>
-              </Link>
+              <SwitchToReg />
             </View>
           </View>
         )}

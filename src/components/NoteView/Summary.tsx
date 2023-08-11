@@ -1,8 +1,61 @@
 import { ScrollView, View } from "react-native";
-import { Card, Text } from "@rneui/themed";
+import { Card, Text, useTheme } from "@rneui/themed";
 import { INote } from "@/modules/note";
+import { theme as custom } from "@/constants/theme";
 
 export const Summary = ({ note }: { note: INote | undefined }) => {
+  const { theme } = useTheme();
+
+  const SummaryCard = ({
+    title,
+    children,
+  }: {
+    title: string;
+    children: React.ReactNode;
+  }) => {
+    return (
+      <Card
+        containerStyle={{
+          borderRadius: 5,
+          width: "95%",
+        }}
+      >
+        <Card.Title
+          style={{ textTransform: "uppercase", color: theme.colors.primary }}
+        >
+          {title}
+        </Card.Title>
+        <View>{children}</View>
+      </Card>
+    );
+  };
+
+  const SummaryItem = ({
+    label,
+    data,
+    isLast = false,
+  }: {
+    label: string;
+    data: string | number | undefined;
+    isLast?: boolean;
+  }) => {
+    return (
+      <View>
+        <Text
+          style={{
+            fontFamily: custom.fonts.primaryBold,
+            color: theme.colors.primary,
+            marginBottom: 5,
+          }}
+        >
+          {label}
+        </Text>
+        <Text style={{ marginBottom: 5 }}>{data}</Text>
+        {!isLast && <Card.Divider />}
+      </View>
+    );
+  };
+
   if (!note) return null;
   return (
     <ScrollView style={{ flex: 1, width: "100%" }}>
@@ -15,251 +68,50 @@ export const Summary = ({ note }: { note: INote | undefined }) => {
         <Text style={{ fontSize: 12, color: "grey" }}>
           Added on {new Date(note.createdAt!).toLocaleString()}
         </Text>
-        <Card
-          containerStyle={{
-            borderRadius: 5,
-            width: "95%",
-          }}
-        >
-          <Card.Title style={{ textTransform: "uppercase" }}>
-            Information
-          </Card.Title>
-          <View>
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Name
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.information.name}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Country
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.information.country}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Region
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.information.region}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Grapes
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.information.grapes}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Producer
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.information.producer}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Vintage
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.information.vintage}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Alcohol
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.information.alcohol}
-              </Text>
-            </View>
-          </View>
-        </Card>
-
-        <Card
-          containerStyle={{
-            borderRadius: 5,
-            width: "95%",
-          }}
-        >
-          <Card.Title style={{ textTransform: "uppercase" }}>
-            Appearance
-          </Card.Title>
-          <View>
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Intensity
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.appearance?.intensity}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Color
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.appearance?.color}
-                {note.appearance?.variant && `: ${note.appearance?.variant}`}
-              </Text>
-            </View>
-          </View>
-        </Card>
-
-        <Card
-          containerStyle={{
-            borderRadius: 5,
-            width: "95%",
-          }}
-        >
-          <Card.Title style={{ textTransform: "uppercase" }}>Nose</Card.Title>
-          <View>
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Intensity
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.nose?.intensity}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Aroma characteristics
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.nose?.aromas}
-              </Text>
-            </View>
-          </View>
-        </Card>
-
-        <Card
-          containerStyle={{
-            borderRadius: 5,
-            width: "95%",
-          }}
-        >
-          <Card.Title style={{ textTransform: "uppercase" }}>Palate</Card.Title>
-          <View>
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Sweetnes
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.palate?.sweetness}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Acidity
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.palate?.acidity}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Tannin
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.palate?.tannin}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Alcohol
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.palate?.alcohol}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Body
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.palate?.body}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Flavor intensity
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.palate?.intensity}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Flavor characteristics
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.palate?.flavors}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Finish
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.palate?.finish}
-              </Text>
-            </View>
-          </View>
-        </Card>
-
-        <Card
-          containerStyle={{
-            borderRadius: 5,
-            width: "95%",
-          }}
-        >
-          <Card.Title style={{ textTransform: "uppercase" }}>
-            Conclusions
-          </Card.Title>
-          <View>
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Quality
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.conclusions?.quality}
-              </Text>
-            </View>
-            <Card.Divider />
-            <View>
-              <Text style={{ fontFamily: "Roboto_700Bold", marginBottom: 5 }}>
-                Comments
-              </Text>
-              <Text style={{ color: "black", marginBottom: 5 }}>
-                {note.conclusions?.comments}
-              </Text>
-            </View>
-          </View>
-        </Card>
+        <SummaryCard title="Information">
+          <SummaryItem label="Name" data={note.information.name} />
+          <SummaryItem label="Country" data={note.information.country} />
+          <SummaryItem label="Region" data={note.information.region} />
+          <SummaryItem label="Grapes" data={note.information.grapes} />
+          <SummaryItem label="Producer" data={note.information.producer} />
+          <SummaryItem label="Vintage" data={note.information.vintage} />
+          <SummaryItem label="Alcohol" data={note.information.alcohol} isLast />
+        </SummaryCard>
+        <SummaryCard title="Appearance">
+          <SummaryItem label="Intensity" data={note.appearance?.intensity} />
+          <SummaryItem
+            label="Color"
+            data={`${note.appearance?.color}${
+              note.appearance?.variant && `: ${note.appearance?.variant}`
+            }`}
+            isLast
+          />
+        </SummaryCard>
+        <SummaryCard title="Nose">
+          <SummaryItem label="Intensity" data={note.nose?.intensity} />
+          <SummaryItem
+            label="Aroma characteristics"
+            data={note.nose?.aromas}
+            isLast
+          />
+        </SummaryCard>
+        <SummaryCard title="Palate">
+          <SummaryItem label="Sweetnes" data={note.palate?.sweetness} />
+          <SummaryItem label="Acidity" data={note.palate?.acidity} />
+          <SummaryItem label="Tannin" data={note.palate?.tannin} />
+          <SummaryItem label="Alcohol" data={note.palate?.alcohol} />
+          <SummaryItem label="Body" data={note.palate?.body} />
+          <SummaryItem label="Flavor intensity" data={note.palate?.intensity} />
+          <SummaryItem
+            label="Flavor characteristics"
+            data={note.palate?.flavors}
+          />
+          <SummaryItem label="Finish" data={note.palate?.finish} isLast />
+        </SummaryCard>
+        <SummaryCard title="Conclusions">
+          <SummaryItem label="Quality" data={note.conclusions?.quality} />
+          <SummaryItem label="Comments" data={note.conclusions?.comments} />
+        </SummaryCard>
       </View>
     </ScrollView>
   );

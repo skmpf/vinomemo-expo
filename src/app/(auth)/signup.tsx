@@ -1,13 +1,15 @@
 import { View } from "react-native";
-import { Button, Text, Input } from "@rneui/themed";
+import { Button, Text, Input, useTheme } from "@rneui/themed";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Link } from "expo-router";
 import { useSignup } from "@/hooks/useSignup";
 import { KeyboardAvoidingContainer } from "@/components/KeyboardAvoidingContainer";
+import { SwitchToLogin } from "@/components/SwitchToLogin";
+import { theme as custom } from "@/constants/theme";
 
 export default function Page() {
   const { isLoading, signupUser } = useSignup();
+  const { theme } = useTheme();
 
   return (
     <KeyboardAvoidingContainer>
@@ -17,13 +19,18 @@ export default function Page() {
           paddingVertical: 50,
         }}
       >
-        <Text h4 style={{ marginBottom: 20, fontFamily: "Roboto_700Bold" }}>
-          Sign up with email
-        </Text>
-        <Text>
+        <Text h2>Sign up with email</Text>
+        <Text style={{ color: theme.colors.primary }}>
           Save your delicious wine tasting notes and access them anywhere by
           signing up for{" "}
-          <Text style={{ fontFamily: "NotoSerif_400Regular" }}>VinoMemo</Text>
+          <Text
+            style={{
+              fontFamily: custom.fonts.brand,
+              color: theme.colors.primary,
+            }}
+          >
+            VinoMemo
+          </Text>
         </Text>
       </View>
       <Formik
@@ -109,24 +116,7 @@ export default function Page() {
                 radius="md"
                 containerStyle={{ width: "100%", paddingBottom: 30 }}
               />
-              <Link href="/login">
-                <Text
-                  style={{
-                    color: "#932541",
-                    fontFamily: "Roboto_400Regular_Italic",
-                  }}
-                >
-                  Already have an account?{" "}
-                  <Text
-                    style={{
-                      textTransform: "uppercase",
-                      fontFamily: "Roboto_700Bold",
-                    }}
-                  >
-                    Login
-                  </Text>
-                </Text>
-              </Link>
+              <SwitchToLogin />
             </View>
           </View>
         )}
