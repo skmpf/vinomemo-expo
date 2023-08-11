@@ -36,9 +36,10 @@ export default function Page() {
         </Text>
       </View>
       <Formik
+        // TODO: remove credentials
         initialValues={{
-          email: "***REMOVED***",
-          password: "***REMOVED***",
+          email: process.env.EXPO_PUBLIC_EMAIL || "",
+          password: process.env.EXPO_PUBLIC_PASSWORD || "",
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()
