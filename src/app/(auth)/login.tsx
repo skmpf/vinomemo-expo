@@ -1,11 +1,12 @@
 import { View } from "react-native";
-import { Button, Text, Input, useTheme } from "@rneui/themed";
+import { Button, Text, useTheme } from "@rneui/themed";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useLogin } from "@/hooks/useLogin";
 import { KeyboardAvoidingContainer } from "@/components/KeyboardAvoidingContainer";
 import { SwitchToReg } from "@/components/SwitchToReg";
 import { theme as custom } from "@/constants/theme";
+import { FormField } from "@/components/FormField";
 
 export default function Page() {
   const { isLoading, loginUser } = useLogin();
@@ -55,28 +56,24 @@ export default function Page() {
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-          <View style={{ paddingBottom: 20, paddingTop: 100 }}>
-            <View style={{ marginBottom: 30 }}>
-              <Text>Email</Text>
-              <Input
-                onChangeText={handleChange("email")}
-                onBlur={handleBlur("email")}
-                value={values.email}
-                errorMessage={errors.email}
-                autoCapitalize="none"
-              />
-            </View>
-            <View style={{ marginBottom: 30 }}>
-              <Text>Password</Text>
-              <Input
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                value={values.password}
-                errorMessage={errors.password}
-                secureTextEntry={true}
-                autoCapitalize="none"
-              />
-            </View>
+          <View style={{ paddingTop: 150 }}>
+            <FormField
+              label="Email"
+              name="email"
+              value={values.email}
+              errorMessage={errors.email}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+            />
+            <FormField
+              label="Password"
+              name="password"
+              value={values.password}
+              errorMessage={errors.password}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              secureTextEntry={true}
+            />
             <View
               style={{
                 alignItems: "center",

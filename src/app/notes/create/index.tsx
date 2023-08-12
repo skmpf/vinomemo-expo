@@ -1,11 +1,15 @@
+import { useRef } from "react";
 import { Stack, router } from "expo-router";
 import { Alert, Button, View } from "react-native";
 import { useTheme } from "@rneui/themed";
 import { Entypo } from "@expo/vector-icons";
+import { FormikProps } from "formik";
 import { NoteForm } from "@/components/NoteForm/NoteForm";
+import { NoteFormValues } from "@/modules/note";
 
 export default function CreateNote() {
   const { theme } = useTheme();
+  const formikRef = useRef<FormikProps<NoteFormValues>>(null);
 
   const handleBack = () => {
     Alert.alert(
@@ -21,7 +25,9 @@ export default function CreateNote() {
     );
   };
 
-  const handleSave = () => {};
+  const handleSave = () => {
+    formikRef.current?.submitForm();
+  };
 
   return (
     <View
@@ -53,7 +59,7 @@ export default function CreateNote() {
           ),
         }}
       />
-      <NoteForm />
+      <NoteForm ref={formikRef} />
     </View>
   );
 }
