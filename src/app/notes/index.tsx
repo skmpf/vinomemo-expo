@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { Stack, router } from "expo-router";
 import { Alert, Button, FlatList, RefreshControl, View } from "react-native";
+import { Text, useTheme } from "@rneui/themed";
 import { AntDesign } from "@expo/vector-icons";
 import { useAuth } from "@/providers/AuthProvider";
 import { useFetch } from "@/hooks/useFetch";
@@ -14,6 +15,7 @@ export default function Home() {
     isLoading,
     refetchData,
   } = useFetch(`users/${user?._id}/notes`);
+  const { theme } = useTheme();
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -39,7 +41,7 @@ export default function Home() {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#FFF8F0",
+        backgroundColor: theme.colors.background,
       }}
     >
       <Stack.Screen
@@ -50,16 +52,21 @@ export default function Home() {
               onPress={() => router.push("/notes/create")}
               name="pluscircleo"
               size={24}
-              color="#C94264"
+              color={theme.colors.primary}
             />
           ),
           headerRight: () => (
-            <Button title="Logout" onPress={handleBack} color="#C94264" />
+            <Button
+              title="Logout"
+              onPress={handleBack}
+              color={theme.colors.primary}
+            />
           ),
         }}
       />
       <FlatList
         style={{ width: "100%" }}
+        contentContainerStyle={{ flex: 1 }}
         data={notes}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
@@ -69,8 +76,23 @@ export default function Home() {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            tintColor="#C94264"
+            tintColor={theme.colors.primary}
           />
+        }
+        ListEmptyComponent={
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 20,
+            }}
+          >
+            <Text>
+              You don't have any note yet, create one by clicking on the +
+              button!
+            </Text>
+          </View>
         }
       />
     </View>

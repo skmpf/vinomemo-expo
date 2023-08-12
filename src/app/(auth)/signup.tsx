@@ -16,7 +16,7 @@ export default function Page() {
       <View
         style={{
           alignItems: "center",
-          paddingVertical: 50,
+          paddingVertical: 20,
         }}
       >
         <Text h2>Sign up with email</Text>
@@ -106,6 +106,7 @@ export default function Page() {
             <View
               style={{
                 alignItems: "center",
+                paddingTop: 20,
               }}
             >
               <Button
@@ -114,7 +115,7 @@ export default function Page() {
                 title="Create an account"
                 size="lg"
                 radius="md"
-                containerStyle={{ width: "100%", paddingBottom: 30 }}
+                containerStyle={{ width: "100%", marginBottom: 30 }}
               />
               <SwitchToLogin />
             </View>

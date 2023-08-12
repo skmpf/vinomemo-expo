@@ -16,7 +16,7 @@ export default function Page() {
       <View
         style={{
           alignItems: "center",
-          paddingVertical: 50,
+          paddingVertical: 20,
         }}
       >
         <Text h2>
@@ -80,6 +80,7 @@ export default function Page() {
             <View
               style={{
                 alignItems: "center",
+                paddingTop: 20,
               }}
             >
               <Button
@@ -90,7 +91,7 @@ export default function Page() {
                 radius="md"
                 containerStyle={{
                   width: "100%",
-                  paddingBottom: 30,
+                  marginBottom: 30,
                 }}
               />
               <SwitchToReg />

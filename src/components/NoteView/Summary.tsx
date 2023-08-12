@@ -65,7 +65,7 @@ export const Summary = ({ note }: { note: INote | undefined }) => {
           padding: 10,
         }}
       >
-        <Text style={{ fontSize: 12, color: "grey" }}>
+        <Text style={{ fontSize: 12, color: theme.colors.grey3 }}>
           Added on {new Date(note.createdAt!).toLocaleString()}
         </Text>
         <SummaryCard title="Information">

@@ -7,13 +7,13 @@ export const KeyboardAvoidingContainer = ({
 }) => {
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{ flex: 1, width: "100%" }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingHorizontal: 30,
+          padding: 30,
         }}
       >
         {children}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { router } from "expo-router";
-import { Button as RNEButton, ListItem, Text } from "@rneui/themed";
+import { Button as RNEButton, ListItem, Text, useTheme } from "@rneui/themed";
 import { Icon } from "@rneui/base";
 import { Entypo } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -17,6 +17,7 @@ export const NoteCard = ({
   callback: () => void;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { theme } = useTheme();
 
   const deleteNote = async () => {
     try {
@@ -48,17 +49,17 @@ export const NoteCard = ({
     <ListItem.Swipeable
       rightWidth={90}
       bottomDivider
-      containerStyle={{ backgroundColor: "#FFF8F0" }}
+      containerStyle={{ backgroundColor: theme.colors.background }}
       onPress={() => router.push(`/notes/${note._id}`)}
       rightContent={() => (
         <RNEButton
           loading={isLoading}
           disabled={isLoading}
-          loadingProps={{ color: "black" }}
+          loadingProps={{ color: theme.colors.black }}
           containerStyle={{
             flex: 1,
             justifyContent: "center",
-            backgroundColor: "#C94264",
+            backgroundColor: theme.colors.primary,
           }}
           type="clear"
           onPress={handleDelete}
@@ -74,14 +75,17 @@ export const NoteCard = ({
         >
           {note.information.name}
         </ListItem.Title>
-        <Text style={{ color: "grey" }}>
-          <Entypo name="location-pin" color="#C94264" />{" "}
+        <Text style={{ color: theme.colors.grey3 }}>
+          <Entypo name="location-pin" color={theme.colors.primary} />{" "}
           {note.information.region}
         </Text>
-        <Text style={{ textTransform: "capitalize", color: "grey" }}>
-          <Entypo name="star" color="#C94264" /> {note.conclusions.quality}
+        <Text
+          style={{ textTransform: "capitalize", color: theme.colors.grey3 }}
+        >
+          <Entypo name="star" color={theme.colors.primary} />{" "}
+          {note.conclusions.quality}
         </Text>
-        <Text style={{ fontSize: 12, color: "grey" }}>
+        <Text style={{ fontSize: 12, color: theme.colors.grey3 }}>
           Added on {new Date(note.createdAt!).toLocaleString()}
         </Text>
       </ListItem.Content>

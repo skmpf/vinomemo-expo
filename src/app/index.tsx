@@ -48,7 +48,7 @@ export default function Page() {
         <Button
           size="lg"
           radius="md"
-          containerStyle={{ width: "100%", paddingBottom: 20 }}
+          containerStyle={{ width: "100%", marginBottom: 20 }}
           onPress={() => router.push("/signup")}
         >
           Sign up with email

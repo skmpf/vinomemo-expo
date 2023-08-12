@@ -33,7 +33,7 @@ const theme = createTheme({
         fontFamily: custom.fonts.brand,
         fontSize: 50,
         color: custom.colors.primary,
-        paddingBottom: 20,
+        marginBottom: 20,
       },
       h2Style: {
         fontFamily: custom.fonts.primaryBold,
@@ -41,7 +41,13 @@ const theme = createTheme({
         color: custom.colors.primary,
         marginBottom: 20,
       },
-      h4Style: {},
+      h4Style: {
+        fontFamily: custom.fonts.primaryBold,
+        fontSize: 18,
+        color: custom.colors.primary,
+        textAlign: "center",
+        marginBottom: 20,
+      },
     },
   },
 });
