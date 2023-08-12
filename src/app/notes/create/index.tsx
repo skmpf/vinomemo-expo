@@ -1,11 +1,12 @@
 import { useRef } from "react";
 import { Stack, router } from "expo-router";
-import { Alert, Button, View } from "react-native";
+import { Alert, Button } from "react-native";
 import { useTheme } from "@rneui/themed";
 import { Entypo } from "@expo/vector-icons";
 import { FormikProps } from "formik";
 import { NoteForm } from "@/components/NoteForm/NoteForm";
 import { NoteFormValues } from "@/modules/note";
+import { ViewContainer } from "@/components/ViewContainer";
 
 export default function CreateNote() {
   const { theme } = useTheme();
@@ -30,14 +31,7 @@ export default function CreateNote() {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: theme.colors.background,
-      }}
-    >
+    <ViewContainer pH={0}>
       <Stack.Screen
         options={{
           title: "New note",
@@ -60,6 +54,6 @@ export default function CreateNote() {
         }}
       />
       <NoteForm ref={formikRef} />
-    </View>
+    </ViewContainer>
   );
 }

@@ -6,6 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useAuth } from "@/providers/AuthProvider";
 import { useFetch } from "@/hooks/useFetch";
 import { NoteCard } from "@/components/NoteView/NoteCard";
+import { ViewContainer } from "@/components/ViewContainer";
 
 export default function Home() {
   const { logout, user } = useAuth();
@@ -36,14 +37,7 @@ export default function Home() {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: theme.colors.background,
-      }}
-    >
+    <ViewContainer pH={0}>
       <Stack.Screen
         options={{
           title: "My notes",
@@ -85,16 +79,16 @@ export default function Home() {
               flex: 1,
               alignItems: "center",
               justifyContent: "center",
-              padding: 20,
+              paddingHorizontal: 20,
             }}
           >
-            <Text>
+            <Text style={{ lineHeight: 20 }}>
               You don't have any note yet, create one by clicking on the +
               button!
             </Text>
           </View>
         }
       />
-    </View>
+    </ViewContainer>
   );
 }

@@ -3,18 +3,13 @@ import { router } from "expo-router";
 import { Button, Text, useTheme } from "@rneui/themed";
 import { SwitchToLogin } from "@/components/SwitchToLogin";
 import { theme as custom } from "@/constants/theme";
+import { ViewContainer } from "@/components/ViewContainer";
 
 export default function Page() {
   const { theme } = useTheme();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingHorizontal: 30,
-        justifyContent: "space-around",
-      }}
-    >
+    <ViewContainer>
       <View>
         <Text h1>
           Note down your wine tasting{" "}
@@ -55,6 +50,6 @@ export default function Page() {
         </Button>
         <SwitchToLogin />
       </View>
-    </View>
+    </ViewContainer>
   );
 }

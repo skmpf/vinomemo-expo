@@ -1,9 +1,10 @@
 import { Stack, router, useLocalSearchParams } from "expo-router";
-import { Button, View } from "react-native";
+import { Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useTheme } from "@rneui/themed";
 import { useFetch } from "@/hooks/useFetch";
 import { Summary } from "@/components/NoteView/Summary";
+import { ViewContainer } from "@/components/ViewContainer";
 
 export default function Note() {
   const { theme } = useTheme();
@@ -11,14 +12,7 @@ export default function Note() {
   const { data: note, isLoading, refetchData } = useFetch(`notes/${id}`);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: theme.colors.background,
-      }}
-    >
+    <ViewContainer pH={0}>
       <Stack.Screen
         options={{
           title: "Summary",
@@ -41,6 +35,6 @@ export default function Note() {
         }}
       />
       <Summary note={note} />
-    </View>
+    </ViewContainer>
   );
 }
