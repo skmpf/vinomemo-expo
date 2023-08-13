@@ -3,6 +3,7 @@ import { useFormikContext } from "formik";
 import { Text } from "@rneui/themed";
 import { INote } from "@/modules/note";
 import { FormField } from "@/components/FormField";
+import { AlcoholPicker } from "@/components/NoteForm/elements/AlcoholPicker";
 
 export const InformationForm: React.FC = () => {
   const { values, errors, handleChange, handleBlur } =
@@ -10,13 +11,9 @@ export const InformationForm: React.FC = () => {
 
   return (
     <View
-      style={
-        {
-          // paddingBottom: 20,
-          // paddingTop: 100,
-          // backgroundColor: "purple",
-        }
-      }
+      style={{
+        paddingBottom: 20,
+      }}
     >
       <Text h4>Information</Text>
       <FormField
@@ -62,19 +59,13 @@ export const InformationForm: React.FC = () => {
       <FormField
         label="Vintage"
         name="information.vintage"
-        value={values.information.vintage}
+        value={values.information?.vintage?.toString()}
         errorMessage={errors.information?.vintage}
         handleChange={handleChange}
         handleBlur={handleBlur}
+        keyboardType="numeric"
       />
-      <FormField
-        label="Alcohol"
-        name="information.alcohol"
-        value={values.information.alcohol}
-        errorMessage={errors.information?.alcohol}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-      />
+      <AlcoholPicker />
     </View>
   );
 };
