@@ -10,6 +10,7 @@ import {
 } from "@/modules/note";
 import { KeyboardAvoidingContainer } from "../KeyboardAvoidingContainer";
 import { InformationForm } from "@/components/NoteForm/InformationForm";
+import { AppearanceForm } from "@/components/NoteForm/AppearanceForm";
 
 const VINOMEMO_API_URL =
   process.env.EXPO_PUBLIC_VINOMEMO_API_URL || "http://localhost:3001";
@@ -62,7 +63,7 @@ export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
         {() => (
           <KeyboardAvoidingContainer>
             <InformationForm />
-            <InformationForm />
+            <AppearanceForm />
           </KeyboardAvoidingContainer>
         )}
       </Formik>
