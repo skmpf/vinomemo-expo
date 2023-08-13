@@ -8,9 +8,7 @@ import { INote } from "@/modules/note";
 export const AlcoholPicker = () => {
   const { theme } = useTheme();
   const { values, setFieldValue } = useFormikContext<INote>();
-  const [selectedABV, setSelectedABV] = useState(
-    values.information.alcohol.toString()
-  );
+  const [selectedABV, setSelectedABV] = useState(values.information.alcohol);
 
   const handleABVChange = (itemValue: string) => {
     setSelectedABV(itemValue);
