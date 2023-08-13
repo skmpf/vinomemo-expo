@@ -13,6 +13,7 @@ export default function CreateNote() {
   const formikRef = useRef<FormikProps<NoteFormValues>>(null);
 
   const handleBack = () => {
+    if (formikRef.current?.dirty) {
     Alert.alert(
       "Warning",
       "Are you sure you want to go back? All changes will be lost.",
@@ -24,6 +25,9 @@ export default function CreateNote() {
         { text: "Confirm", onPress: () => router.back() },
       ]
     );
+    } else {
+      router.back();
+    }
   };
 
   const handleSave = () => {
