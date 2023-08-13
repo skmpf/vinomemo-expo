@@ -59,8 +59,6 @@ export default function Home() {
         }}
       />
       <FlatList
-        style={{ width: "100%" }}
-        contentContainerStyle={{ flex: 1 }}
         data={notes}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
