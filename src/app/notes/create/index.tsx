@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Stack, router } from "expo-router";
-import { Alert, Button } from "react-native";
-import { useTheme } from "@rneui/themed";
+import { Alert } from "react-native";
+import { Button, useTheme } from "@rneui/themed";
 import { Entypo } from "@expo/vector-icons";
 import { FormikProps } from "formik";
 import { NoteForm } from "@/components/NoteForm/NoteForm";
@@ -11,27 +11,32 @@ import { ViewContainer } from "@/components/ViewContainer";
 export default function CreateNote() {
   const { theme } = useTheme();
   const formikRef = useRef<FormikProps<NoteFormValues>>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleBack = () => {
     if (formikRef.current?.dirty) {
-    Alert.alert(
-      "Warning",
-      "Are you sure you want to go back? All changes will be lost.",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        { text: "Confirm", onPress: () => router.back() },
-      ]
-    );
+      Alert.alert(
+        "Warning",
+        "Are you sure you want to go back? All changes will be lost.",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+          { text: "Confirm", onPress: () => router.back() },
+        ]
+      );
     } else {
       router.back();
     }
   };
 
-  const handleSave = () => {
-    formikRef.current?.submitForm();
+  const handleSave = async () => {
+    if (!isLoading) {
+      setIsLoading(true);
+      await formikRef.current?.submitForm();
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,8 +56,10 @@ export default function CreateNote() {
           headerRight: () => (
             <Button
               title="Save"
+              loading={isLoading}
+              disabled={isLoading}
+              type="clear"
               onPress={handleSave}
-              color={theme.colors.primary}
             />
           ),
         }}

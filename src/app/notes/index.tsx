@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Stack, router } from "expo-router";
+import { Stack, router, useFocusEffect } from "expo-router";
 import { Alert, Button, FlatList, RefreshControl, View } from "react-native";
 import { Text, useTheme } from "@rneui/themed";
 import { AntDesign } from "@expo/vector-icons";
@@ -7,16 +7,19 @@ import { useAuth } from "@/providers/AuthProvider";
 import { useFetch } from "@/hooks/useFetch";
 import { NoteCard } from "@/components/NoteView/NoteCard";
 import { ViewContainer } from "@/components/ViewContainer";
+import { INote } from "@/modules/note";
 
 export default function Home() {
   const { logout, user } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
-  const {
-    data: notes,
-    isLoading,
-    refetchData,
-  } = useFetch(`users/${user?._id}/notes`);
+  const { data: notes, refetchData } = useFetch(`users/${user?._id}/notes`);
   const { theme } = useTheme();
+
+  notes?.sort((a: INote, b: INote) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
+
+  useFocusEffect(useCallback(refetchData, []));
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

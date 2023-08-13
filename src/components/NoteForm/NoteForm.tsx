@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { Formik, FormikProps } from "formik";
@@ -11,14 +11,15 @@ import {
 import { KeyboardAvoidingContainer } from "../KeyboardAvoidingContainer";
 import { InformationForm } from "@/components/NoteForm/InformationForm";
 import { AppearanceForm } from "@/components/NoteForm/AppearanceForm";
+import { NoseForm } from "@/components/NoteForm/NoseForm";
+import { PalateForm } from "@/components/NoteForm/PalateForm";
+import { ConclusionsForm } from "@/components/NoteForm/ConclusionsForm";
 
 const VINOMEMO_API_URL =
   process.env.EXPO_PUBLIC_VINOMEMO_API_URL || "http://localhost:3001";
 
 export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
   (props, ref) => {
-    const [isLoading, setIsLoading] = useState(false);
-
     const createNote = async (note: NoteFormValues) => {
       try {
         const token = await AsyncStorage.getItem("token");
@@ -40,12 +41,8 @@ export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
     };
 
     const handleSubmit = async (values: NoteFormValues) => {
-      if (!isLoading) {
-        setIsLoading(true);
-        const note = await createNote(values);
-        note && router.push("/notes");
-        setIsLoading(false);
-      }
+      const note = await createNote(values);
+      note && router.push("/notes");
     };
 
     return (
@@ -54,16 +51,16 @@ export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
         validationSchema={NoteFormValidationSchema}
         validateOnBlur={false}
         validateOnChange={false}
-        onSubmit={(values) => {
-          // !isLoading && handleSubmit(values);
-          console.log(values);
-        }}
+        onSubmit={(values) => handleSubmit(values)}
         innerRef={ref}
       >
         {() => (
           <KeyboardAvoidingContainer>
             <InformationForm />
             <AppearanceForm />
+            <NoseForm />
+            <PalateForm />
+            <ConclusionsForm />
           </KeyboardAvoidingContainer>
         )}
       </Formik>
