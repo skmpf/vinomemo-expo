@@ -11,7 +11,6 @@ export const KeyboardAvoidingContainer = ({
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView
-        showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           padding: 30,
         }}
