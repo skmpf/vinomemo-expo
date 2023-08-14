@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { Formik, FormikProps } from "formik";
 import {
   INote,
@@ -20,6 +20,8 @@ const VINOMEMO_API_URL =
 
 export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
   (props, ref) => {
+    const { id } = useLocalSearchParams();
+
     const createNote = async (note: NoteFormValues) => {
       try {
         const token = await AsyncStorage.getItem("token");
@@ -40,8 +42,33 @@ export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
       }
     };
 
+    const updateNote = async (note: NoteFormValues) => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        if (!token) throw new Error("No token found");
+
+        const res = await fetch(`${VINOMEMO_API_URL}/notes/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(note),
+        });
+        if (!res.ok) throw new Error("Error updating note");
+        return (await res.json()) as INote;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     const handleSubmit = async (values: NoteFormValues) => {
-      const note = await createNote(values);
+      let note;
+      if (id) {
+        note = await updateNote(values);
+      } else {
+        note = await createNote(values);
+      }
       note && router.push("/notes");
     };
 
