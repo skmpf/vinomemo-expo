@@ -1,5 +1,5 @@
 import { Stack, router, useLocalSearchParams } from "expo-router";
-import { Button } from "react-native";
+import { ActivityIndicator, Button } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useTheme } from "@rneui/themed";
 import { useFetch } from "@/hooks/useFetch";
@@ -9,7 +9,7 @@ import { ViewContainer } from "@/components/ViewContainer";
 export default function ViewNote() {
   const { theme } = useTheme();
   const { id } = useLocalSearchParams();
-  const { data: note } = useFetch(`notes/${id}`);
+  const { data: note, isLoading } = useFetch(`notes/${id}`);
 
   return (
     <ViewContainer pH={0}>
@@ -34,7 +34,11 @@ export default function ViewNote() {
           ),
         }}
       />
-      <Summary note={note} />
+      {isLoading ? (
+        <ActivityIndicator color={theme.colors.primary} />
+      ) : (
+        <Summary note={note} />
+      )}
     </ViewContainer>
   );
 }
