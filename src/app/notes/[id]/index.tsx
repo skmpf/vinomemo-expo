@@ -6,10 +6,10 @@ import { useFetch } from "@/hooks/useFetch";
 import { Summary } from "@/components/NoteView/Summary";
 import { ViewContainer } from "@/components/ViewContainer";
 
-export default function Note() {
+export default function ViewNote() {
   const { theme } = useTheme();
   const { id } = useLocalSearchParams();
-  const { data: note, isLoading, refetchData } = useFetch(`notes/${id}`);
+  const { data: note } = useFetch(`notes/${id}`);
 
   return (
     <ViewContainer pH={0}>
@@ -28,7 +28,7 @@ export default function Note() {
           headerRight: () => (
             <Button
               title="Edit"
-              onPress={() => router.push("/notes/edit")}
+              onPress={() => router.push(`/notes/edit/${id}`)}
               color={theme.colors.primary}
             />
           ),

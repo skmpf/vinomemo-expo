@@ -54,7 +54,7 @@ const theme = createTheme({
 
 SplashScreen.preventAutoHideAsync();
 
-export default function Layout() {
+export default function AppLayout() {
   const [robotoLoaded] = useRoboto({
     Roboto_400Regular,
     Roboto_400Regular_Italic,

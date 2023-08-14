@@ -9,7 +9,7 @@ import { NoteCard } from "@/components/NoteView/NoteCard";
 import { ViewContainer } from "@/components/ViewContainer";
 import { INote } from "@/modules/note";
 
-export default function Home() {
+export default function NotePage() {
   const { logout, user } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
   const { data: notes, refetchData } = useFetch(`users/${user?._id}/notes`);

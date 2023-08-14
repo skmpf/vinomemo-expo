@@ -1,7 +1,7 @@
 import { useTheme } from "@rneui/themed";
 import { Stack } from "expo-router/stack";
 
-export default function Layout() {
+export default function NoteLayout() {
   const { theme } = useTheme();
   return (
     <Stack

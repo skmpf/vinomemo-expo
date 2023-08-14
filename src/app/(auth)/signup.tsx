@@ -8,7 +8,7 @@ import { SwitchToLogin } from "@/components/SwitchToLogin";
 import { theme as custom } from "@/constants/theme";
 import { FormField } from "@/components/FormField";
 
-export default function Page() {
+export default function SignupPage() {
   const { isLoading, signupUser } = useSignup();
   const { theme } = useTheme();
 

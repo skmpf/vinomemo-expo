@@ -8,7 +8,7 @@ import { SwitchToReg } from "@/components/SwitchToReg";
 import { theme as custom } from "@/constants/theme";
 import { FormField } from "@/components/FormField";
 
-export default function Page() {
+export default function LoginPage() {
   const { isLoading, loginUser } = useLogin();
   const { theme } = useTheme();
 

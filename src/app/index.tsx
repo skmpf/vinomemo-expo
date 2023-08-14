@@ -5,7 +5,7 @@ import { SwitchToLogin } from "@/components/SwitchToLogin";
 import { theme as custom } from "@/constants/theme";
 import { ViewContainer } from "@/components/ViewContainer";
 
-export default function Page() {
+export default function HomePage() {
   const { theme } = useTheme();
 
   return (
