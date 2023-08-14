@@ -65,7 +65,7 @@ export const InformationForm: React.FC = () => {
         handleBlur={handleBlur}
         keyboardType="numeric"
       />
-      <AlcoholPicker />
+      <AlcoholPicker value={values.information.alcohol} />
     </View>
   );
 };

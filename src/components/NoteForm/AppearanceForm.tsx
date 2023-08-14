@@ -15,7 +15,7 @@ export const AppearanceForm: React.FC = () => {
       }}
     >
       <Text h4>Appearance</Text>
-      <ColorPicker />
+      <ColorPicker value={values.appearance} />
       <ScaleRadio
         label="Intensity"
         name="appearance.intensity"

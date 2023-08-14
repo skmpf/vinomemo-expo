@@ -1,29 +1,21 @@
-import { useState } from "react";
 import { View } from "react-native";
 import { Text, useTheme } from "@rneui/themed";
 import { Picker } from "@react-native-picker/picker";
 import { useFormikContext } from "formik";
 import { INote } from "@/modules/note";
 
-export const QualityPicker = () => {
+export const QualityPicker = ({ value }: { value: string }) => {
   const { theme } = useTheme();
-  const { values, setFieldValue } = useFormikContext<INote>();
-  const [selectedQuality, setSelectedQuality] = useState(
-    values.conclusions.quality
-  );
+  const { setFieldValue } = useFormikContext<INote>();
 
-  const handleQualityChange = (itemValue: string) => {
-    setSelectedQuality(itemValue);
-    setFieldValue("conclusions.quality", itemValue);
+  const handleQualityChange = (quality: string) => {
+    setFieldValue("conclusions.quality", quality);
   };
 
   return (
     <View style={{ marginBottom: 10 }}>
       <Text style={{ color: theme.colors.primary }}>Quality</Text>
-      <Picker
-        selectedValue={selectedQuality}
-        onValueChange={handleQualityChange}
-      >
+      <Picker selectedValue={value} onValueChange={handleQualityChange}>
         <Picker.Item label="Select quality" />
         <Picker.Item label="Poor" value="poor" />
         <Picker.Item label="Acceptable" value="acceptable" />

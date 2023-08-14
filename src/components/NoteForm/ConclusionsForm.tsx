@@ -16,7 +16,7 @@ export const ConclusionsForm: React.FC = () => {
       }}
     >
       <Text h4>Conclusions</Text>
-      <QualityPicker />
+      <QualityPicker value={values.conclusions.quality} />
       <FormField
         label="Comments"
         name="conclusions.comments"

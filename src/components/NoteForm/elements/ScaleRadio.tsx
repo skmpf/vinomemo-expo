@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Pressable, View } from "react-native";
 import { Text, useTheme } from "@rneui/themed";
 import { useFormikContext } from "formik";
@@ -19,11 +18,10 @@ export const ScaleRadio: React.FC<ScaleRadioProps> = ({
 }) => {
   const { theme } = useTheme();
   const { setFieldValue } = useFormikContext<INote>();
-  const [selected, setSelected] = useState(value);
+
   const maxHeight = 40;
 
   const handleSelect = (option: string) => {
-    setSelected(option);
     setFieldValue(name, option);
   };
 
@@ -53,9 +51,7 @@ export const ScaleRadio: React.FC<ScaleRadioProps> = ({
                 borderRadius: 10,
                 marginHorizontal: 5,
                 backgroundColor:
-                  selected === option
-                    ? theme.colors.primary
-                    : theme.colors.grey5,
+                  value === option ? theme.colors.primary : theme.colors.grey5,
               }}
             />
             <Text

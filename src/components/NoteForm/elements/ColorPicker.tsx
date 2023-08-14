@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Pressable, View } from "react-native";
 import { Text, useTheme } from "@rneui/themed";
 import { useFormikContext } from "formik";
@@ -42,19 +41,19 @@ type SelectButtonProps = {
   handleSelect: (color: string) => void;
 };
 
-export const ColorPicker = () => {
+export const ColorPicker = ({
+  value,
+}: {
+  value: { intensity: string; color: string; variant: string };
+}) => {
   const { theme } = useTheme();
   const { setFieldValue } = useFormikContext<INote>();
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedVariant, setSelectedVariant] = useState("");
 
   const handleColorSelect = (color: string) => {
-    setSelectedColor(color);
-    setSelectedVariant("");
     setFieldValue("appearance.color", color);
+    setFieldValue("appearance.variant", "");
   };
   const handleVariantSelect = (variant: string) => {
-    setSelectedVariant(variant);
     setFieldValue("appearance.variant", variant);
   };
 
@@ -104,7 +103,7 @@ export const ColorPicker = () => {
             key={color.color}
             color={color.color}
             backgroundColor={color.hex}
-            selected={selectedColor}
+            selected={value.color}
             handleSelect={handleColorSelect}
           />
         ))}
@@ -121,13 +120,13 @@ export const ColorPicker = () => {
         }}
       >
         {COLORS_OPTIONS.find(
-          (option) => option.color === selectedColor
+          (option) => option.color === value.color
         )?.variants.map((variant) => (
           <SelectButton
             key={variant.name}
             color={variant.name}
             backgroundColor={variant.hex}
-            selected={selectedVariant}
+            selected={value.variant}
             handleSelect={handleVariantSelect}
           />
         ))}
