@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { handleError } from "@/modules/error";
 
 const VINOMEMO_API_URL =
   process.env.EXPO_PUBLIC_VINOMEMO_API_URL || "http://localhost:3001";
@@ -10,7 +11,6 @@ export const useFetch = (
 ) => {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -28,8 +28,8 @@ export const useFetch = (
       if (!res.ok) throw new Error("Error fetching data");
       const data = await res.json();
       setData(data);
-    } catch (e: any) {
-      setError(e);
+    } catch (error) {
+      handleError(error, "Error fetching data");
     } finally {
       setIsLoading(false);
     }
@@ -43,5 +43,5 @@ export const useFetch = (
     fetchData();
   };
 
-  return { data, isLoading, error, refetchData };
+  return { data, isLoading, refetchData };
 };

@@ -5,6 +5,7 @@ import { Icon } from "@rneui/base";
 import { Entypo } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { INote } from "@/modules/note";
+import { handleError } from "@/modules/error";
 
 const VINOMEMO_API_URL =
   process.env.EXPO_PUBLIC_VINOMEMO_API_URL || "http://localhost:3001";
@@ -34,7 +35,7 @@ export const NoteCard = ({
       if (!res.ok) throw new Error("Error deleting note");
       return (await res.json()) as INote;
     } catch (error) {
-      console.error(error);
+      handleError(error, "Error deleting note");
     } finally {
       setIsLoading(false);
     }

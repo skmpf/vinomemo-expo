@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { router, useRootNavigationState, useSegments } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
-import { Alert } from "react-native";
+import { handleError } from "@/modules/error";
 
 export type User = {
   _id: string;
@@ -67,11 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const user = decoded?.user;
       setAuth(user);
     } catch (error) {
-      Alert.alert(
-        "Authentication error",
-        error instanceof Error ? error.message : "Please try again later",
-        [{ text: "OK" }]
-      );
+      handleError(error, "Authentication error");
     }
   };
 
@@ -80,11 +76,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       await AsyncStorage.multiRemove(["token", "user"]);
       setAuth(null);
     } catch (error) {
-      Alert.alert(
-        "Logout error",
-        error instanceof Error ? error.message : "Please try again later",
-        [{ text: "OK" }]
-      );
+      handleError(error, "Logout error");
     }
   };
 

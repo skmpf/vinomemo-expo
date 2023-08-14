@@ -14,6 +14,7 @@ import { AppearanceForm } from "@/components/NoteForm/AppearanceForm";
 import { NoseForm } from "@/components/NoteForm/NoseForm";
 import { PalateForm } from "@/components/NoteForm/PalateForm";
 import { ConclusionsForm } from "@/components/NoteForm/ConclusionsForm";
+import { handleError } from "@/modules/error";
 
 const VINOMEMO_API_URL =
   process.env.EXPO_PUBLIC_VINOMEMO_API_URL || "http://localhost:3001";
@@ -37,8 +38,8 @@ export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
         });
         if (!res.ok) throw new Error("Error creating note");
         return (await res.json()) as INote;
-      } catch (e: any) {
-        console.log(e);
+      } catch (error) {
+        handleError(error, "Error creating note");
       }
     };
 
@@ -58,7 +59,7 @@ export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
         if (!res.ok) throw new Error("Error updating note");
         return (await res.json()) as INote;
       } catch (error) {
-        console.error(error);
+        handleError(error, "Error updating note");
       }
     };
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Alert } from "react-native";
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "@/providers/AuthProvider";
+import { handleError } from "@/modules/error";
 
 type UseLoginResponse = {
   isLoading: boolean;
@@ -27,22 +27,15 @@ export const useLogin = (): UseLoginResponse => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+      if (!response.ok) throw new Error(data.message);
       if (data.token) {
         await authenticate(data.token);
         await AsyncStorage.setItem("token", data.token);
       }
 
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
       router.replace("/notes");
     } catch (error) {
-      Alert.alert(
-        "Login error",
-        error instanceof Error ? error.message : "Please try again later",
-        [{ text: "OK" }]
-      );
+      handleError(error, "Login error");
     } finally {
       setIsLoading(false);
     }
