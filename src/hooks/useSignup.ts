@@ -18,7 +18,7 @@ export const useSignup = (): UseSignupResponse => {
     if (token) {
       await authenticate(token);
     }
-    router.push("/notes");
+    router.replace("/notes");
     setIsLoading(false);
   };
   return { isLoading, signupUser };

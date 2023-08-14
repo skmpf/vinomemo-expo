@@ -28,7 +28,7 @@ export default function ViewNote() {
           headerRight: () => (
             <Button
               title="Edit"
-              onPress={() => router.push(`/notes/edit/${id}`)}
+              onPress={() => router.replace(`/notes/edit/${id}`)}
               color={theme.colors.primary}
             />
           ),

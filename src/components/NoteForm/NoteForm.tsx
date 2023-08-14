@@ -25,7 +25,7 @@ export const NoteForm = forwardRef<FormikProps<NoteFormValues>>(
       } else {
         note = await api.createNote(values);
       }
-      note && router.push("/notes");
+      note?._id && router.replace(`/notes/${note._id}`);
     };
 
     return (
