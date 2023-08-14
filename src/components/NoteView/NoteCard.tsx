@@ -3,12 +3,8 @@ import { router } from "expo-router";
 import { Button as RNEButton, ListItem, Text, useTheme } from "@rneui/themed";
 import { Icon } from "@rneui/base";
 import { Entypo } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { INote } from "@/modules/note";
-import { handleError } from "@/modules/error";
-
-const VINOMEMO_API_URL =
-  process.env.EXPO_PUBLIC_VINOMEMO_API_URL || "http://localhost:3001";
+import api from "@/modules/api";
 
 export const NoteCard = ({
   note,
@@ -20,29 +16,10 @@ export const NoteCard = ({
   const [isLoading, setIsLoading] = useState(false);
   const { theme } = useTheme();
 
-  const deleteNote = async () => {
-    try {
-      setIsLoading(true);
-      const token = await AsyncStorage.getItem("token");
-      if (!token) throw new Error("No token found");
-
-      const res = await fetch(`${VINOMEMO_API_URL}/notes/${note._id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Error deleting note");
-      return (await res.json()) as INote;
-    } catch (error) {
-      handleError(error, "Error deleting note");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleDelete = async () => {
-    await deleteNote();
+    setIsLoading(true);
+    await api.deleteNote(note._id);
+    setIsLoading(false);
     callback();
   };
 
