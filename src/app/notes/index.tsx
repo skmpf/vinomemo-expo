@@ -61,35 +61,28 @@ export default function NotePage() {
           ),
         }}
       />
-      <FlatList
-        data={notes}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item }) => (
-          <NoteCard note={item} callback={refetchData} />
-        )}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            tintColor={theme.colors.primary}
-          />
-        }
-        ListEmptyComponent={
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-              paddingHorizontal: 20,
-            }}
-          >
-            <Text style={{ lineHeight: 20 }}>
-              You don't have any note yet, create one by clicking on the +
-              button!
-            </Text>
-          </View>
-        }
-      />
+      {notes?.length > 0 ? (
+        <FlatList
+          data={notes}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item }) => (
+            <NoteCard note={item} callback={refetchData} />
+          )}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor={theme.colors.primary}
+            />
+          }
+        />
+      ) : (
+        <View style={{ alignContent: "center", paddingHorizontal: 20 }}>
+          <Text style={{ fontSize: 17, lineHeight: 20 }}>
+            You don't have any note yet, create one by clicking on the + button!
+          </Text>
+        </View>
+      )}
     </ViewContainer>
   );
 }
