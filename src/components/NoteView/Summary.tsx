@@ -74,7 +74,7 @@ export const Summary = ({ note }: { note: INote | undefined }) => {
         <SummaryItem label="Grapes" data={note.information.grapes} />
         <SummaryItem label="Producer" data={note.information.producer} />
         <SummaryItem label="Vintage" data={note.information.vintage} />
-        <SummaryItem label="Alcohol" data={note.information.alcohol} isLast />
+        <SummaryItem label="ABV" data={note.information.alcohol} isLast />
       </SummaryCard>
       <SummaryCard title="Appearance">
         <SummaryItem label="Intensity" data={note.appearance?.intensity} />

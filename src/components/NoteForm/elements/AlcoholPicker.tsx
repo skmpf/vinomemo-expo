@@ -14,7 +14,7 @@ export const AlcoholPicker = ({ value }: { value: string }) => {
 
   return (
     <View style={{ marginBottom: 10 }}>
-      <Text style={{ color: theme.colors.primary }}>Alcohol</Text>
+      <Text style={{ color: theme.colors.primary }}>ABV</Text>
       <Picker selectedValue={value} onValueChange={handleABVChange}>
         {Array.from(Array(45).keys()).map((i) => {
           const value = (i * 0.5).toFixed(1);
